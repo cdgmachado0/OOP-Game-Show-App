@@ -33,10 +33,11 @@
 
      showMatchedLetter(userLetter) {
         const liLetters = document.querySelector('#phrase').querySelector('ul').children;
-        liLetters.forEach(li => {
+        for (let i = 0; i < liLetters.length; i++) {
+            let li = liLetters[i];
             if (li.textContent === userLetter) {
                 li.className = `show letter ${userLetter}`;
-            }
-        });
+            }  
+        }
      }
  }

@@ -7,23 +7,21 @@ const mainDivKeyboard = document.querySelector('#qwerty');
 const keyDivs = document.querySelectorAll('.keyrow');
 const startGameButton = document.querySelector('#btn__reset');
 
+const game = new Game();
+
 startGameButton.addEventListener('click', e => {
-    overlayDiv.style.display = 'none';
+    game.startGame();
 })
 
 
 
-
-
-// mainDivKeyboard.addEventListener('click', e => {
-//     if (e.target.tagName === 'BUTTON') {
-//         e.target.textContent
-//     }
-// });
-
+mainDivKeyboard.addEventListener('click', e => {
+    if (e.target.tagName === 'BUTTON') {
+        newPhrase.checkLetter(e.target.textContent);
+    }
+});
 
 
 
-const newPhrase = new Phrase('Mucho gusto!');
-newPhrase.addPhraseDisplay();
-// newPhrase.checkLetter();
+
+
