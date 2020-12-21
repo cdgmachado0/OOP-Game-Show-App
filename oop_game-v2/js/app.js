@@ -12,13 +12,7 @@ startGameButton.addEventListener('click', e => {
 })
 
 
-// const lettersOfKeyboard = [];
-// for (let i = 0; i < keyDivs.length; i++) {
-//     let buttonsForLetters = keyDivs[i].children;
-//     for (let j = 0; j < buttonsForLetters.length; j++) {
-//         lettersOfKeyboard.push(buttonsForLetters[j].textContent);
-//     }
-// }
+
 
 
 // mainDivKeyboard.addEventListener('click', e => {
