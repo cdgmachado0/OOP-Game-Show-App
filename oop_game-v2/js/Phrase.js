@@ -24,11 +24,12 @@
 
      checkLetter(userLetter) {
         const lettersOfPhrase = Array.from(this.phrase);
-        lettersOfPhrase.forEach(letter => {
+        for (let i = 0; i < lettersOfPhrase.length; i++) {
+            let letter = lettersOfPhrase[i];
             if (userLetter === letter) {
-                this.showMatchedLetter(userLetter);
-            }
-        });
+                return true;
+            } 
+        }
      }
 
      showMatchedLetter(userLetter) {
@@ -38,6 +39,20 @@
             if (li.textContent === userLetter) {
                 li.className = `show letter ${userLetter}`;
             }  
+        }
+     }
+
+     correctLetter(userLetter) {
+        const keyDivs = mainDivKeyboard.children;
+        for (let i = 0; i < keyDivs.length; i++) {
+            let buttons = keyDivs[i].children;
+            for (let j = 0; j < buttons.length; j++) {
+                let letterButton = buttons[j];
+                if (userLetter === letterButton.textContent) {
+                    letterButton.disabled = true;
+                    letterButton.className = `key chosen`;
+                } 
+            }
         }
      }
  }

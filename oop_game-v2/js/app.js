@@ -17,7 +17,7 @@ startGameButton.addEventListener('click', e => {
 
 mainDivKeyboard.addEventListener('click', e => {
     if (e.target.tagName === 'BUTTON') {
-        newPhrase.checkLetter(e.target.textContent);
+        game.handleInteraction(e.target);
     }
 });
 
