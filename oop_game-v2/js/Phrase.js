@@ -8,7 +8,6 @@
      }
 
      addPhraseDisplay() {
-        const phraseUl = document.querySelector('#phrase').querySelector('ul');
         const lettersOfPhrase = Array.from(this.phrase);
         lettersOfPhrase.forEach(letter => {
             const li = document.createElement('li');
@@ -33,7 +32,7 @@
      }
 
      showMatchedLetter(userLetter) {
-        const liLetters = document.querySelector('#phrase').querySelector('ul').children;
+        const liLetters = phraseUl.children;
         for (let i = 0; i < liLetters.length; i++) {
             let li = liLetters[i];
             if (li.textContent === userLetter) {
@@ -43,16 +42,11 @@
      }
 
      correctLetter(userLetter) {
-        const keyDivs = mainDivKeyboard.children;
-        for (let i = 0; i < keyDivs.length; i++) {
-            let buttons = keyDivs[i].children;
-            for (let j = 0; j < buttons.length; j++) {
-                let letterButton = buttons[j];
-                if (userLetter === letterButton.textContent) {
-                    letterButton.disabled = true;
-                    letterButton.className = `key chosen`;
-                } 
+        keyButtons.forEach(button => {
+            if (userLetter === button.textContent) {
+                button.disabled = true;
+                button.className = `key chosen`;
             }
-        }
+        });
      }
  }
