@@ -6,9 +6,9 @@
      constructor() {
          this.missed = 0;
          this.phrases = [
-             'Natalia por favor',
-             'Te amo mucho',
-             'Pizdietz',
+             'hola',
+             'sapo',
+             'papa',
              'Piscina'
          ];
          this.activePhrase = null;
@@ -29,13 +29,14 @@
          const userLetter = element.textContent;
          if (this.activePhrase.checkLetter(userLetter)) {
              this.activePhrase.showMatchedLetter(userLetter);
-             this.activePhrase.correctLetter(userLetter);
-             this.checkForWin();
+             this.activePhrase.chosenLetterOnKeyboard(userLetter);
+             if (this.checkForWin()) {
+                 this.gameOver(true);
+             } 
          } else {
              element.className = 'key wrong';
              element.disabled = 'true';
              this.removeLife();
-             this.gameOver();
          }
      }
 
@@ -46,6 +47,9 @@
                 this.missed++
                 break;
             } 
+        }
+        if (this.missed === 5) {
+            this.gameOver(false);
         }
      }
 
@@ -60,19 +64,23 @@
             if (li.className === `show letter ${li.textContent}` && li.className !== 'space') {
                 winFlag++;
                 if(winFlag === liLetters.length - spaces) {
-                    title.textContent = 'YOU WON!!';
-                    this.disableOrEnableKeyboard(true);
-                    setTimeout(this.reset, 3000);
+                    return true;
                 }
             }
         }
      }
 
-     gameOver() {
-        if (this.missed === 5) {
-            title.textContent = 'You lost! Game Over';
-            setTimeout(this.reset, 3000);
+     gameOver(bool) {
+        if (!bool) {
+            gameOverMessage.textContent = 'You lost! Game Over';
+            overlayDiv.className = 'start lose';
+        } else if (bool) {
+            gameOverMessage.textContent = 'YOU WON!!';
+            overlayDiv.className = 'start win';
+            this.disableOrEnableKeyboard(true);
         }
+        overlayDiv.style.display = '';
+        this.reset();
      }
 
      disableOrEnableKeyboard(bool) {
@@ -80,11 +88,11 @@
      }
 
      reset() {
-         phraseUl.innerHTML = ' ';
-         this.disableOrEnableKeyboard(false);
-         keyButtons.forEach(button => button.className = 'key');
-         heartList.forEach(heart => heart.src = 'images/liveHeart.png');
-         title.textContent = 'Phrase Hunter';
-         overlayDiv.style.display = 'block';
-     } //finishing the reset of the game. trying to get the start game back
+         phraseUl.innerHTML = '';
+        //  this.disableOrEnableKeyboard(false); //why can't I use this function instead. Console says it's not a function
+        keyButtons.forEach(button => button.disabled = false); 
+        keyButtons.forEach(button => button.className = 'key');
+        heartList.forEach(heart => heart.src = 'images/liveHeart.png');
+        this.missed = 0;
+     } 
  }

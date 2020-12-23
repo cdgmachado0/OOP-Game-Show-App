@@ -4,24 +4,27 @@
 
 const startGameButton = document.querySelector('#btn__reset');
 const overlayDiv = document.querySelector('#overlay');
-const title = document.querySelector('h2.header');
+const gameOverMessage = document.querySelector('#game-over-message');
 const phraseUl = document.querySelector('#phrase').querySelector('ul');
 const mainDivKeyboard = document.querySelector('#qwerty');
 const keyButtons = mainDivKeyboard.querySelectorAll('.key');
 const keyDivs = document.querySelectorAll('.keyrow');
 const heartList = document.querySelectorAll('img');
 
-const game = new Game();
+
+let globalGame;
 
 startGameButton.addEventListener('click', e => {
+    const game = new Game();
     game.startGame();
+    globalGame = game;
+    return globalGame;
 })
-
 
 
 mainDivKeyboard.addEventListener('click', e => {
     if (e.target.tagName === 'BUTTON') {
-        game.handleInteraction(e.target);
+        globalGame.handleInteraction(e.target);
     }
 });
 

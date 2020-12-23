@@ -41,7 +41,7 @@
         }
      }
 
-     correctLetter(userLetter) {
+     chosenLetterOnKeyboard(userLetter) {
         keyButtons.forEach(button => {
             if (userLetter === button.textContent) {
                 button.disabled = true;
