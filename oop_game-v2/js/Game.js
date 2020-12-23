@@ -25,8 +25,10 @@
         return this.phrases[Math.floor(Math.random() * 4)];
      }
 
-     handleInteraction(element) {
-         const userLetter = element.textContent;
+     handleInteraction(userLetter) {
+         if (typeof userLetter !== 'string') {
+            userLetter = userLetter.textContent;
+         } 
          if (this.activePhrase.checkLetter(userLetter)) {
              this.activePhrase.showMatchedLetter(userLetter);
              this.activePhrase.chosenLetterOnKeyboard(userLetter);
@@ -34,8 +36,17 @@
                  this.gameOver(true);
              } 
          } else {
-             element.className = 'key wrong';
-             element.disabled = 'true';
+             if (typeof userLetter !== 'string') {
+                userLetter.className = 'key wrong';
+                userLetter.disabled = 'true';
+             } else {
+                 keyButtons.forEach(button => {
+                     if (button.textContent === userLetter) {
+                        button.className = 'key wrong';
+                        button.disabled = 'true';
+                     }
+                 });
+             }
              this.removeLife();
          }
      }

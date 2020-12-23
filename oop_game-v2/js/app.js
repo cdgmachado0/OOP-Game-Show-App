@@ -12,21 +12,25 @@ const keyDivs = document.querySelectorAll('.keyrow');
 const heartList = document.querySelectorAll('img');
 
 
-let globalGame;
-
 startGameButton.addEventListener('click', e => {
     const game = new Game();
     game.startGame();
-    globalGame = game;
-    return globalGame;
+    document.addEventListener('keydown', e => {
+        if (/^[a-z]$/.test(e.key)) {
+            game.handleInteraction(e.key);
+        }
+    });
+    mainDivKeyboard.addEventListener('click', e => {
+        if (e.target.tagName === 'BUTTON') {
+            game.handleInteraction(e.target);
+        }
+    });
 })
 
 
-mainDivKeyboard.addEventListener('click', e => {
-    if (e.target.tagName === 'BUTTON') {
-        globalGame.handleInteraction(e.target);
-    }
-});
+
+
+
 
 
 
