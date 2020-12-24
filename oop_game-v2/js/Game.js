@@ -6,14 +6,17 @@
      constructor() {
          this.missed = 0;
          this.phrases = [
-             'hola',
-             'sapo',
-             'papa',
-             'Piscina'
+             'life is good',
+             'treehouse',
+             'javascript',
+             'the great joy of food'
          ];
          this.activePhrase = null;
      }
 
+     /**
+      * Starts a new game 
+      */
      startGame() {
         overlayDiv.style.display = 'none';
         const newPhrase = new Phrase(this.getRandomPhrase());
@@ -21,10 +24,17 @@
         this.activePhrase = newPhrase;
      }
 
+     /**
+      * Gets a new random phrase
+      */
      getRandomPhrase() {
         return this.phrases[Math.floor(Math.random() * 4)];
      }
 
+     /**
+      * Handles the logic of the game if the player won, lost or if the correct letter was selected
+      * @param {string||node element} userLetter letter or HTML button chosen by the user
+      */
      handleInteraction(userLetter) {
          if (typeof userLetter !== 'string') {
             userLetter = userLetter.textContent;
@@ -51,6 +61,9 @@
          }
      }
 
+     /**
+      * Remove a life from the user and calls gameOver() is case the game is finished
+      */
      removeLife() {
         for (let i = 0; i < heartList.length; i++) {
             if (this.missed === i) {
@@ -64,8 +77,10 @@
         }
      }
 
+     /**
+      * Checks to see if the player have won
+      */
      checkForWin() {
-        const liLetters = phraseUl.children;
         let winFlag = 0;
         let spaces = 0;
         for (let li of liLetters) {
@@ -81,6 +96,10 @@
         }
      }
 
+     /**
+      * Checks if the player won or lost
+      * @param {boolean} bool true is the player won and vice versa
+      */
      gameOver(bool) {
         if (!bool) {
             gameOverMessage.textContent = 'You lost! Game Over';
@@ -89,27 +108,27 @@
             gameOverMessage.textContent = 'YOU WON!!';
             overlayDiv.className = 'start win';
             this.manipulateButtons('disabled', true);
-            // this.disableOrEnableKeyboard(true);
         }
         overlayDiv.style.display = '';
         this.reset();
      }
 
-    //  disableOrEnableKeyboard(bool) {
-    //     keyButtons.forEach(button => button.disabled = bool);
-    //  }
-
+     /**
+      * Assigns key/value pairs to the online keyboard buttons
+      * @param {string} prop property to be assigned
+      * @param {string} value value of the property
+      */
      manipulateButtons(prop, value) {
          keyButtons.forEach(button => button[prop] = value);
      }
 
+     /**
+      * Resets the game after the player has won or lost
+      */
      reset() {
-         phraseUl.innerHTML = '';
-        //  this.disableOrEnableKeyboard(false); //why can't I use this function instead. Console says it's not a function
+        phraseUl.innerHTML = '';
         this.manipulateButtons('disabled', false);
         this.manipulateButtons('className', 'key');
-        // keyButtons.forEach(button => button.disabled = false); 
-        // keyButtons.forEach(button => button.className = 'key');
         heartList.forEach(heart => heart.src = 'images/liveHeart.png');
         this.missed = 0;
      } 
