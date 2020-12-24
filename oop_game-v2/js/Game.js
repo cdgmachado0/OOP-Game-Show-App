@@ -88,21 +88,28 @@
         } else if (bool) {
             gameOverMessage.textContent = 'YOU WON!!';
             overlayDiv.className = 'start win';
-            this.disableOrEnableKeyboard(true);
+            this.manipulateButtons('disabled', true);
+            // this.disableOrEnableKeyboard(true);
         }
         overlayDiv.style.display = '';
         this.reset();
      }
 
-     disableOrEnableKeyboard(bool) {
-        keyButtons.forEach(button => button.disabled = bool);
+    //  disableOrEnableKeyboard(bool) {
+    //     keyButtons.forEach(button => button.disabled = bool);
+    //  }
+
+     manipulateButtons(prop, value) {
+         keyButtons.forEach(button => button[prop] = value);
      }
 
      reset() {
          phraseUl.innerHTML = '';
         //  this.disableOrEnableKeyboard(false); //why can't I use this function instead. Console says it's not a function
-        keyButtons.forEach(button => button.disabled = false); 
-        keyButtons.forEach(button => button.className = 'key');
+        this.manipulateButtons('disabled', false);
+        this.manipulateButtons('className', 'key');
+        // keyButtons.forEach(button => button.disabled = false); 
+        // keyButtons.forEach(button => button.className = 'key');
         heartList.forEach(heart => heart.src = 'images/liveHeart.png');
         this.missed = 0;
      } 
