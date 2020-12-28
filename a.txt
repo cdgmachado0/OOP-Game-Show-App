@@ -1,0 +1,4 @@
+{phrase: 'life is good'},
+             {phrase: 'treehouse'},
+             {phrase: 'javascript'},
+             {phrase: 'the great joy of food'}

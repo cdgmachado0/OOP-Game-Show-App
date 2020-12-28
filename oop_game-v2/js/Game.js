@@ -6,10 +6,10 @@
      constructor() {
          this.missed = 0;
          this.phrases = [
-             'life is good',
-             'treehouse',
-             'javascript',
-             'the great joy of food'
+            new Phrase('life is good'),
+            new Phrase('treehouse'),
+            new Phrase('javascript'),
+            new Phrase('the great joy of food')
          ];
          this.activePhrase = null;
      }
@@ -19,7 +19,7 @@
       */
      startGame() {
         overlayDiv.style.display = 'none';
-        const newPhrase = new Phrase(this.getRandomPhrase());
+        const newPhrase = this.getRandomPhrase();
         newPhrase.addPhraseDisplay();
         this.activePhrase = newPhrase;
      }

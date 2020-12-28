@@ -23,9 +23,13 @@ startGameButton.addEventListener('click', e => {
 
 // Listens to user's input on their keyboard
 document.addEventListener('keydown', e => {
+    let flag = true;
+    keyButtons.forEach(button => {
+        if (button.disabled && button.textContent === e.key) {flag = false;}
+    });
     if (overlayDiv.style.display !== 'none') {
         e.preventDefault();
-    } else if (/^[a-zA-Z]$/.test(e.key)) {
+    } else if (/^[a-zA-Z]$/.test(e.key) && flag) {
         globalGame.handleInteraction(e.key.toLowerCase());
     }
 });
