@@ -9,7 +9,8 @@
             new Phrase('life is good'),
             new Phrase('treehouse'),
             new Phrase('javascript'),
-            new Phrase('the great joy of food')
+            new Phrase('the great joy of food'),
+            new Phrase('mountain dew')
          ];
          this.activePhrase = null;
      }
@@ -28,7 +29,7 @@
       * Gets a new random phrase
       */
      getRandomPhrase() {
-        return this.phrases[Math.floor(Math.random() * 4)];
+        return this.phrases[Math.floor(Math.random() * 5)];
      }
 
      /**
